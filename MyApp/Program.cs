@@ -20,15 +20,19 @@ namespace MyApp
                 })
             .ConfigureAppConfiguration((hostingEnv, config) =>
             {
-                config.AddEncryptedAppSettings(crypter =>
+
+                if (!hostingEnv.HostingEnvironment.IsDevelopment())
                 {
-                    crypter.CertificatePath = "MyApp.pfx";
-                    crypter.KeysToDecrypt = new List<string>
+                    config.AddEncryptedAppSettings(crypter =>
                     {
-                        "ConnectionStrings:DefaultConnection",
-                        "SensitiveInfo:RandomKey"
-                    };
-                });
+                        crypter.CertificatePath = "MyApp.pfx";
+                        crypter.KeysToDecrypt = new List<string>
+                        {
+                            "ConnectionStrings:DefaultConnection",
+                            "SensitiveInfo:RandomKey"
+                        };
+                    });
+                }
             });
     }
 }
