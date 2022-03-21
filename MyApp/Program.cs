@@ -1,10 +1,7 @@
-using DevAttic.ConfigCrypter.CertificateLoaders;
 using DevAttic.ConfigCrypter.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MyApp
 {
@@ -25,8 +22,7 @@ namespace MyApp
             {
                 config.AddEncryptedAppSettings(crypter =>
                 {
-                    crypter.CertificatePath = Path.Combine(Directory.GetCurrentDirectory(), "MyApp.pfx");
-                    //crypter.CertificateLoader = new CertificateLoader();
+                    crypter.CertificatePath = "MyApp.pfx";
                     crypter.KeysToDecrypt = new List<string>
                     {
                         "ConnectionStrings:DefaultConnection",
@@ -34,13 +30,5 @@ namespace MyApp
                     };
                 });
             });
-    }
-
-    public class CertificateLoader : ICertificateLoader
-    {
-        public X509Certificate2 LoadCertificate()
-        {
-            return new X509Certificate2("MyApp.pfx", string.Empty, X509KeyStorageFlags.MachineKeySet);
-        }
     }
 }
