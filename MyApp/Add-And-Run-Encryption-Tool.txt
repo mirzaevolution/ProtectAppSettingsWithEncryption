@@ -1,0 +1,3 @@
+﻿1. dotnet tool install -g DevAttic.ConfigCrypter.Console
+2. config-crypter encrypt --path MyApp.pfx --file appsettings.json --key "ConnectionStrings.DefaultConnection" --replace
+3. config-crypter encrypt --path MyApp.pfx --file appsettings.json --key "SensitiveInfo.RandomKey" --replace

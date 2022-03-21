@@ -1,0 +1,4 @@
+﻿#don't use password in the certificate. Just leave it blank!
+
+1. makecert -n "CN=MyApp" -a sha256 -sv MyApp.pvk -r MyApp.cer
+2. pvk2pfx -pvk MyApp.pvk -spc MyApp.cer -pfx MyApp.pfx
